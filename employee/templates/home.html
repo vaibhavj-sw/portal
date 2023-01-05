@@ -1,0 +1,61 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+  <div class="add_buttons">
+
+    <div class="button-group">
+
+    </div>
+
+  </div>
+
+  <div>
+
+    <h4>Currently Viewing {{ header }}</h4>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Company Name</th>
+        <th>Job Tittle</th>
+        <th>Contact Name</th>
+        <th>Contact Number</th>
+        <th>Emails</th>
+        <th>Company Website</th>
+        <th>Address</th>
+        <th>Linkedin</th>
+        <th>Jobs</th>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      {% for item in items %}
+
+      <tr>
+        <td>{{ item.pk }}
+        <td>{{ item.company_name }}</td>
+        <td>{{ item.job_title }}</td>
+        <td>{{ item.contact_name }} $</td>
+        <td>{{ item.contact_number }}</td>
+        <td>{{ item.emails }}</td>
+        <td>{{ item.company_website }}</td>
+        <td>{{ item.address }}</td>
+        <td>{{ item.linkedin }}</td>
+        <td>{{ item.jobs }}</td>
+
+  
+
+
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
