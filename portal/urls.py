@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 from employee import views as emp_views
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", emp_views.homepage, name="homepage"),
-    path("register", emp_views.register_request, name="register"),
-    path("login", emp_views.login_request, name="login")
+    path('portal/admin/', admin.site.urls),
+    path("portal/", emp_views.homepage, name="homepage"),
+    path("portal/register", emp_views.register_request, name="register"),
+    path("portal/login", emp_views.login_request, name="login"),
+    path("portal/logout", emp_views.logout_request, name="logout")
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

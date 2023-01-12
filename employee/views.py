@@ -1,6 +1,6 @@
 from django.shortcuts import  render, redirect
 from .forms import NewUserForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse,JsonResponse,HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -18,7 +18,7 @@ def register_request(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
-			return redirect("/")
+			return redirect("/portal")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
 	return render (request=request, template_name="register.html", context={"register_form":form})
@@ -35,7 +35,7 @@ def login_request(request):
 			if user is not None:
 				login(request, user)
 				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("/")
+				return redirect("/portal")
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
@@ -45,11 +45,17 @@ def login_request(request):
 	form = AuthenticationForm()
 	return render(request=request, template_name="login.html", context={"login_form":form})
 
-@login_required(login_url='/login')
+@login_required(login_url='/portal/login')
+def logout_request(request):
+	logout(request)
+	messages.info(request, "You have successfully logged out.") 
+	return redirect("/portal/login")
+
+@login_required(login_url='/portal/login')
 def homepage(request):
     items = Leads.objects.all()
     context = {
         'items': items,
-        'header': 'Laptops',
+        'header': 'Leads',
     }
     return render(request, 'home.html', context)
