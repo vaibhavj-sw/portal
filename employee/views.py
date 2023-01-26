@@ -26,7 +26,7 @@ def register_request(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
-			return redirect("/portal")
+			return HttpResponse("Registration successful. Please contact admin for account activation.")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 		return HttpResponse("Unsuccessful registration. Invalid information or password policy breach! / Username not available.")
 
