@@ -99,3 +99,15 @@ def password_reset_request(request):
 					return redirect ("/portal/password_reset/done/")
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})
+
+
+def search_lead(request):
+	query = request.GET.get("q")
+	items = Leads.objects.filter(
+		Q(company_name__icontains=query) | Q(contact_name__icontains=query) | Q(emails__icontains=query)
+	)
+	context = {
+        'items': items,
+        'header': 'Leads',
+    }
+	return render(request, 'home.html', context)

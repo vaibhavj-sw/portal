@@ -15,7 +15,8 @@
     <h4>Currently Viewing {{ header }}</h4>
   </div>
 
-  <table class="table table-hover">
+  <table class="table table-hover" style="border: 1px solid black; width: 100%; word-wrap:break-word;
+  table-layout: fixed;">
     <thead>
       <tr>
         <th>ID</th>
@@ -41,12 +42,12 @@
         <td>{{ item.pk }}
         <td>{{ item.company_name }}</td>
         <td>{{ item.job_title }}</td>
-        <td>{{ item.contact_name }} $</td>
+        <td>{{ item.contact_name }}</td>
         <td>{{ item.contact_number }}</td>
         <td>{{ item.emails }}</td>
         <td>{{ item.company_website }}</td>
         <td>{{ item.address }}</td>
-        <td>{{ item.linkedin }}</td>
+        <td>{{ item.linkedin|wordwrap:5|linebreaksbr }}</td>
         <td>{{ item.jobs }}</td>
         <td><button type='button' id="my_button" onclick="location.href='mailto:{{ item.emails }}';"> Send Email</button></td>
   
