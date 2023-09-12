@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from employee import views as emp_views
+from billing import views as bill_views
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -31,6 +32,23 @@ urlpatterns = [
     path('portal/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="password/password_reset_confirm.html"), name='password_reset_confirm'),
     path('portal/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'), name='password_reset_complete'),    
     path("portal/search/", emp_views.search_lead, name="search_results"),
+
+    path("portal/billing", bill_views.dashboard, name="dashboard"),
+    path("portal/clients", bill_views.clients, name="clients"),
+    path('portal/invoices',bill_views.invoices, name='invoices'),
+
+    #Create URL Paths
+    path('portal/invoices/create',bill_views.createInvoice, name='create-invoice'),
+    path('portal/invoices/create-build/<slug:slug>',bill_views.createBuildInvoice, name='create-build-invoice'),
+
+    #Delete an invoice
+    path('portal/invoices/delete/<slug:slug>',bill_views.deleteInvoice, name='delete-invoice'),
+
+    #PDF and EMAIL Paths
+    path('portal/invoices/view-pdf/<slug:slug>',bill_views.viewPDFInvoice, name='view-pdf-invoice'),
+    path('portal/invoices/view-document/<slug:slug>',bill_views.viewDocumentInvoice, name='view-document-invoice'),
+    path('portal/invoices/email-document/<slug:slug>',bill_views.emailDocumentInvoice, name='email-document-invoice'),
+
 
 ]
 

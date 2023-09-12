@@ -3,15 +3,11 @@
 {% block body %}
 
   <div class="add_buttons">
-
     <div class="button-group">
-
     </div>
-
   </div>
-
+  
   <div>
-
     <h4>Currently Viewing {{ header }}</h4>
   </div>
 
@@ -50,13 +46,9 @@
         <td>{{ item.linkedin|wordwrap:5|linebreaksbr }}</td>
         <td>{{ item.jobs }}</td>
         <td><button type='button' id="my_button" onclick="location.href='mailto:{{ item.emails }}';"> Send Email</button></td>
-  
-
-
       </tr>
 
       {% endfor %}
     </tbody>
   </table>
-
 {% endblock %}
