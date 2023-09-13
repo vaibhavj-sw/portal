@@ -102,7 +102,7 @@ class InvoiceForm(forms.ModelForm):
 class SettingsForm(forms.ModelForm):
     class Meta:
         model = Settings
-        fields = ['clientName', 'clientLogo', 'addressLine1', 'province', 'postalCode', 'phoneNumber', 'emailAddress', 'taxNumber']
+        fields = ['clientName', 'addressLine1', 'province', 'postalCode', 'phoneNumber', 'emailAddress', 'taxNumber']
 
 
 class ClientSelectForm(forms.ModelForm):
